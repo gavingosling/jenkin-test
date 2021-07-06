@@ -1,5 +1,5 @@
 def jobs = ["JobA", "JobB", "JobC", "JobD", "JobE", "JobF", "JobG", "JobH"]
- 
+def yaml = readYaml file: 'config.yaml'
 def stagesMap = jobs.collectEntries {
     ["${it}" : generateStage(it)]
 }
