@@ -1,4 +1,13 @@
-
+def generateStage(job) {
+                        return {
+                            stage("stage: ${job}") {
+                                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                                    echo "This is ${job}."
+                                    sleep 1
+                                }
+                            }
+                        }
+                    }
  
 pipeline {
     agent any
@@ -19,16 +28,7 @@ pipeline {
                     config.each{k, v ->
                         countries << k
                     }
-                    def generateStage(job) {
-                        return {
-                            stage("stage: ${job}") {
-                                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-                                    echo "This is ${job}."
-                                    sleep 1
-                                }
-                            }
-                        }
-                    }
+                    
                     def stages = countries.collectEntries {
                         ["${it}" : generateStage(it)]
                     }
