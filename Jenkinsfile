@@ -28,14 +28,16 @@ pipeline {
             steps {
                 script {
                     def yaml = readYaml file: 'config.yaml'
-                    def countriesMap = yaml.get('cross-selling')
+                    def config = yaml.get('cross-selling')
                     def countries = []
-                    countriesMap.each{k, v ->
+                    config.each{k, v ->
                         countries << k
                     }
-                    println countries
-                    (stagesMap.keySet() as List).collate(1).each{
-                        def map = stagesMap.subMap(it)
+                    def stages = countries.collectEntries {
+                        ["${it}" : generateStage(it)]
+                    }
+                    (stages.keySet() as List).collate(1).each{
+                        def map = stages.subMap(it)
                         parallel map
                     }
                 }
