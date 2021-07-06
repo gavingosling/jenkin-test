@@ -1,5 +1,4 @@
 def jobs = ["JobA", "JobB", "JobC", "JobD", "JobE", "JobF", "JobG", "JobH"]
-def yaml = readYaml file: 'config.yaml'
 def stagesMap = jobs.collectEntries {
     ["${it}" : generateStage(it)]
 }
@@ -28,6 +27,7 @@ pipeline {
         stage('parallel stage') {
             steps {
                 script {
+                    def yaml = readYaml file: 'config.yaml'
                     (stagesMap.keySet() as List).collate(1).each{
                         def map = stagesMap.subMap(it)
                         parallel map
