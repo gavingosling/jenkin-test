@@ -28,6 +28,7 @@ pipeline {
             steps {
                 script {
                     def yaml = readYaml file: 'config.yaml'
+                    println yaml
                     (stagesMap.keySet() as List).collate(1).each{
                         def map = stagesMap.subMap(it)
                         parallel map
