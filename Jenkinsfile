@@ -1,4 +1,4 @@
-def jobs = ["JobA", "JobB", "JobC", "JobD", "JobE", "JobF", "JobG", "JobH"]
+def jobs = ["JobA", "JobB", "JobC"]
 def stagesMap = jobs.collectEntries {
     ["${it}" : generateStage(it)]
 }
@@ -8,7 +8,7 @@ def generateStage(job) {
         stage("stage: ${job}") {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
                 echo "This is ${job}."
-                sleep 5
+                sleep 1
             }
         }
     }
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     def yaml = readYaml file: 'config.yaml'
-                    println yaml
+                    println yaml.get('cross-selling')
                     (stagesMap.keySet() as List).collate(1).each{
                         def map = stagesMap.subMap(it)
                         parallel map
