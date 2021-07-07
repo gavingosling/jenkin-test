@@ -2,6 +2,13 @@ def generateStage(job, branch) {
     return {
         stage("stage: ${job}") {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                sh("""
+                if [ ${branch} = "master" ]; then
+                    echo MASTER!
+                else
+                    echo NOT MASTER!
+                fi 
+                """)
                 echo "This is ${job}."
                 echo "This is ${branch}."
                 sleep 1
@@ -26,7 +33,7 @@ pipeline {
                     def yaml = readYaml file: 'config.yaml'
                     def config = yaml.get('cross-selling')
                     def countries = []
-                    def branch = 'ASDF'
+                    def branch = 'master'
                     config.each{k, v ->
                         countries << [country: k, branch: branch]
                     }
