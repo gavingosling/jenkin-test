@@ -6,13 +6,13 @@ pipeline {
             steps {
                 sh("""
                 echo TEST
-                python --version
-                python -m pip install --upgrade pip
-                python -m pip install --user virtualenv
-                python -m venv $JOB_BASE_NAME
+                python3 --version
+                python3 -m pip install --upgrade pip
+                python3 -m pip install --user virtualenv
+                python3 -m venv $JOB_BASE_NAME
                 source $JOB_BASE_NAME/bin/activate
-                python check_deps.py
-                python test.py
+                python3 check_deps.py
+                python3 test.py
                 """)
             }
         }
