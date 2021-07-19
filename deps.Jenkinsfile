@@ -4,7 +4,16 @@ pipeline {
     stages {
         stage('Test Deps') {
             steps {
-                echo 'This stage will be executed first.'
+                sh("""
+                echo TEST
+                python --version
+                python -m pip install --upgrade pip
+                python -m pip install --user virtualenv
+                python -m venv $JOB_BASE_NAME
+                source $JOB_BASE_NAME/bin/activate
+                python check_deps.py
+                python test.py
+                """)
             }
         }
         
