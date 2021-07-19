@@ -7,7 +7,6 @@ pipeline {
                 sh("""
                 echo TEST
                 python3 --version
-                python3 -m pip install --upgrade pip
                 python3 -m pip install --user virtualenv
                 python3 -m venv $JOB_BASE_NAME
                 source $JOB_BASE_NAME/bin/activate
