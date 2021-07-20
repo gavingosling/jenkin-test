@@ -29,8 +29,10 @@ pipeline {
                     def config = yaml.get('cross-selling')
                     def countries = []
                     def branch = 'master'
+                    def filterCountries = "$countries"
+                    filterCountries = filterCountries.split(',')
                     config.each{k, v ->
-                        if("$country" == "" || "$country" == k){
+                        if("$country" == "" || "$country" == k || filterCountries.contains(k)){
                             countries << [country: k, branch: branch]
                         }
                     }
