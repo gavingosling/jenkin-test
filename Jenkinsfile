@@ -30,6 +30,7 @@ pipeline {
                     def countries = []
                     def branch = 'master'
                     def filterCountries = "$countries"
+                    println "$countries"
                     println filterCountries
                     filterCountries = filterCountries.split(',')
                     filterCountries.each{k -> println k}
