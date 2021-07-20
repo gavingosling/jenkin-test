@@ -30,7 +30,9 @@ pipeline {
                     def countries = []
                     def branch = 'master'
                     config.each{k, v ->
-                        countries << [country: k, branch: branch]
+                        if("$country" == "" || "$country" == k){
+                            countries << [country: k, branch: branch]
+                        }
                     }
                     
                     def stages = countries.collectEntries {
