@@ -30,11 +30,9 @@ pipeline {
                     def countries = []
                     def branch = 'master'
                     def filterCountries = "$filter"
-                    println "$country"
-                    println "$filter"
                     filterCountries = filterCountries.split(',')
                     config.each{k, v ->
-                        if("$country" == "" || "$country" == k || filterCountries.contains(k)){
+                        if("$filter" == "" || "$country" == k || filterCountries.contains(k)){
                             countries << [country: k, branch: branch]
                         }
                     }
