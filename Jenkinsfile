@@ -29,7 +29,7 @@ pipeline {
                     def config = yaml.get('cross-selling')
                     def countries = []
                     def branch = 'master'
-                    def filterCountries = "$countries"
+                    // def filterCountries = "$countries"
                     println "$country"
                     println "$countries"
                     // println filterCountries
