@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'PPFGH1DPLCPU' }
  
     stages {
         stage('Startup') {
