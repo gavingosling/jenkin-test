@@ -2,19 +2,30 @@ pipeline {
     agent any
  
     stages {
-        stage('Test Deps') {
+        stage('Startup') {
             steps {
                 sh("""
-                echo TEST
-                python3 --version
-                python3 -m pip install --user virtualenv
-                python3 -m venv $JOB_BASE_NAME
+                cd folder
+                python --version
+                python -m pip install --upgrade pip
+                python -m pip install --user virtualenv
+                python -m venv $JOB_BASE_NAME
                 source $JOB_BASE_NAME/bin/activate
-                python3 check_deps.py
-                python3 test.py
+                python -m pip install -r requirements.txt
                 """)
             }
         }
-        
+
+        stage('Test') {
+            steps {
+                sh("""
+                echo TEST
+                source folder/$JOB_BASE_NAME/bin/activate
+                python check_deps.py --path folder
+                cd folder
+                python test.py
+                """)
+            }
+        }
     }
 }
