@@ -1,12 +1,14 @@
 def generateStage(job, branch) {
     return {
         stage("stage: ${job}") {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-                def text = "ABC"
-                if (branch == "master"){
-                    text = "AAA"
-                } 
-                sh("echo ${text}")
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                    def text = "ABC"
+                    if (branch == "master"){
+                        text = "AAA"
+                    } 
+                    sh("echo ${text}")
+                    }
                 }
             }
         }
