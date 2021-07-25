@@ -11,6 +11,23 @@ def generateStage(job, branch) {
                     }
                 }
             }
+            post { 
+                success { 
+                    script{
+                        echo 'SUCCESS'
+                    }
+                }
+                failure { 
+                    script {
+                        echo 'FAILURE'
+                    }
+                }
+                aborted {
+                    script {
+                        echo 'ABORTED'
+                    }
+                }
+            } 
         }
     }
  
