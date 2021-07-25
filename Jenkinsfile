@@ -10,24 +10,24 @@ def generateStage(job, branch) {
                     sh("echo ${text}")
                     }
                 }
+                post { 
+                    success { 
+                        script{
+                            echo 'SUCCESS'
+                        }
+                    }
+                    failure { 
+                        script {
+                            echo 'FAILURE'
+                        }
+                    }
+                    aborted {
+                        script {
+                            echo 'ABORTED'
+                        }
+                    }
+                } 
             }
-            post { 
-                success { 
-                    script{
-                        echo 'SUCCESS'
-                    }
-                }
-                failure { 
-                    script {
-                        echo 'FAILURE'
-                    }
-                }
-                aborted {
-                    script {
-                        echo 'ABORTED'
-                    }
-                }
-            } 
         }
     }
  
