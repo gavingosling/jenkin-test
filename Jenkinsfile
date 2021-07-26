@@ -6,6 +6,14 @@ def generateStage(job, branch) {
             } catch (e) {
                 echo 'catch'
             } finally {
+                def currentResult = currentBuild.result ?: 'SUCCESS'
+                if(currentResult == 'SUCCESS'){
+                    echo 'SUCCESS'
+                }
+                if(currentResult == 'FAILURE'){
+                    echo 'FAILURE'
+                }
+
                 echo 'finally'
             }
         }
