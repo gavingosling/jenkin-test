@@ -38,27 +38,25 @@ pipeline {
         stage("stage") {
             steps {
                 script {
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-                        sh("echo a")
-                    }
-                    post { 
-                        success { 
-                            script{
-                                echo 'SUCCESS'
-                            }
-                        }
-                        failure { 
-                            script {
-                                echo 'FAILURE'
-                            }
-                        }
-                        aborted {
-                            script {
-                                echo 'ABORTED'
-                            }
-                        }
-                    } 
+                    sh("echo a")
                 }
+                post { 
+                    success { 
+                        script {
+                           echo 'SUCCESS'
+                        }                    
+                    }
+                    failure { 
+                        script {
+                            echo 'FAILURE'
+                        }
+                    }
+                    aborted {
+                        script {
+                            echo 'ABORTED'
+                         }
+                    }
+                } 
             }
         }
  
