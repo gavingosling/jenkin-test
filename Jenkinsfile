@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-                        sh("echo ${text}")
+                        sh("echo a")
                     }
                     post { 
                         success { 
