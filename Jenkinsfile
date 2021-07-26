@@ -37,9 +37,9 @@ pipeline {
     stages {
         stage("stage") {
             steps {
-                script {
-                    sh("echo a")
-                }
+                
+                sh("echo a")
+                
                 post { 
                     success { 
                         script {
