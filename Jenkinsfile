@@ -37,25 +37,17 @@ pipeline {
     stages {
         stage("stage") {
             steps {
-                
                 sh("echo a")
-                
-                post { 
-                    success { 
-                        script {
-                           echo 'SUCCESS'
-                        }                    
-                    }
-                    failure { 
-                        script {
-                            echo 'FAILURE'
-                        }
-                    }
-                    aborted {
-                        script {
-                            echo 'ABORTED'
-                         }
-                    }
+            }
+            post { 
+                success { 
+                    echo 'SUCCESS'               
+                }
+                failure { 
+                    echo 'FAILURE'
+                 }
+                aborted {
+                    echo 'ABORTED'
                 } 
             }
         }
