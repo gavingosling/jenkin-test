@@ -3,7 +3,7 @@ def generateStage(job, branch) {
         stage("stage: ${job}") {
             // Exception exception = null
             try {
-                sh 'echo "Fail!; exit 1'
+                sh 'echo "Fail!"; exit 1'
             } catch (e) {
                 echo 'catch'
                 //exception = e
