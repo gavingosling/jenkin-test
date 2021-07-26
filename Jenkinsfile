@@ -1,10 +1,13 @@
 def generateStage(job, branch) {
     return {
         stage("stage: ${job}") {
+            // Exception exception = null
             try {
-                echo 'try'
+                sh 'echo "Fail!; exit 1'
             } catch (e) {
                 echo 'catch'
+                //exception = e
+                throw e
             } finally {
                 def currentResult = currentBuild.result ?: 'SUCCESS'
                 if(currentResult == 'SUCCESS'){
@@ -12,8 +15,8 @@ def generateStage(job, branch) {
                 }
                 if(currentResult == 'FAILURE'){
                     echo 'FAILURE'
+                    //echo exception
                 }
-
                 echo 'finally'
             }
         }
