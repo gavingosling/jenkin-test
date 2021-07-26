@@ -6,6 +6,7 @@ def generateStage(job, branch) {
             }
         }
     }
+}
  
 pipeline {
     agent any
@@ -55,11 +56,5 @@ pipeline {
             }
         }
 
-        stage('a') {
-            steps {
-                echo 'This stage will be executed first.'
-            }
-        }
-        
     }
 }
