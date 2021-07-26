@@ -35,9 +35,30 @@ pipeline {
     agent any
  
     stages {
-        stage('non-parallel stage') {
+        stage("stage") {
             steps {
-                echo 'This stage will be executed first.'
+                script {
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                        sh("echo ${text}")
+                    }
+                    post { 
+                        success { 
+                            script{
+                                echo 'SUCCESS'
+                            }
+                        }
+                        failure { 
+                            script {
+                                echo 'FAILURE'
+                            }
+                        }
+                        aborted {
+                            script {
+                                echo 'ABORTED'
+                            }
+                        }
+                    } 
+                }
             }
         }
  
@@ -67,7 +88,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('a') {
             steps {
                 echo 'This stage will be executed first.'
