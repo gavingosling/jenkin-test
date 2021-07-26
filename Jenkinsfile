@@ -27,6 +27,7 @@ pipeline {
     agent any
  
     stages {
+        /*
         stage("stage") {
             steps {
                 sh("echo a")
@@ -42,7 +43,7 @@ pipeline {
                     echo 'ABORTED'
                 } 
             }
-        }
+        }*/
  
         stage('parallel stage') {
             steps {
