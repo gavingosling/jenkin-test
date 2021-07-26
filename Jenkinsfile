@@ -1,8 +1,12 @@
 def generateStage(job, branch) {
     return {
         stage("stage: ${job}") {
-            steps {
-                sh("echo a")
+            try {
+                echo 'try'
+            } catch (e) {
+                echo 'catch'
+            } finally {
+                echo 'finally'
             }
         }
     }
