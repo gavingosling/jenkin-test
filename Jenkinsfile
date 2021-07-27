@@ -3,7 +3,7 @@ def generateStage(job, branch) {
         stage("stage: ${job}") {
             Exception exception = null
             try {
-                sh 'echo "Fail!"; exit 1'
+                echo 'a'
             } catch (e) {
                 currentBuild.result = 'FAILURE'
                 exception = e
@@ -17,7 +17,6 @@ def generateStage(job, branch) {
                     echo 'FAILURE'
                     echo exception.toString()
                 }
-                echo 'finally'
             }
         }
     }
