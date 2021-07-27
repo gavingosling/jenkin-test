@@ -9,7 +9,7 @@ def generateStage(job, branch) {
                 exception = e
                 throw e
             } finally {
-                def currentResult = currentBuild.result ?: 'SUCCESS'
+                def currentResult = currentBuild.result;
                 if(currentResult == 'SUCCESS'){
                     echo 'SUCCESS'
                 }
