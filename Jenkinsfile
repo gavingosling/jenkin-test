@@ -1,4 +1,7 @@
-def BuildStatus = [:]
+import groovy.transform.Field
+
+
+@Field Map BuildStatus = [:]
 def generateStage(job, branch) {
     return {
         stage("stage: ${job}") {
