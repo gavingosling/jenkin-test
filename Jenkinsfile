@@ -1,6 +1,4 @@
 import groovy.transform.Field
-import java.time.LocalDataTime
-
 
 @Field Map BuildStatus = [:]
 def generateStage(job, branch) {
@@ -82,7 +80,7 @@ pipeline {
         stage('Shutdown') {
             steps {
                 script {
-                        def dt = LocalDateTime.now().toString()
+                        def dt = new Date().format("yyyy/MM/dd-HH:mm")  
 
                         def log = "PIPELINE: $JOB_BASE_NAME, BUILD: $BUILD_NUMBER DATE: $dt\n"
                         BuildStatus.each{ k, v -> log+= "${k}: ${v}\n" }
