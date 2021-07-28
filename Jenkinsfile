@@ -1,4 +1,5 @@
 import groovy.transform.Field
+import java.time.LocalDataTime
 
 
 @Field Map BuildStatus = [:]
@@ -81,7 +82,9 @@ pipeline {
         stage('Shutdown') {
             steps {
                 script {
-                        def log = "PIPELINE: $JOB_BASE_NAME, BUILD: $BUILD_NUMBER \n"
+                        def dt = LocalDateTime.now().toString()
+
+                        def log = "PIPELINE: $JOB_BASE_NAME, BUILD: $BUILD_NUMBER DATE: $dt\n"
                         BuildStatus.each{ k, v -> log+= "${k}: ${v}\n" }
                         writeFile(file: 'status.txt', text: log)
                         sh("""
