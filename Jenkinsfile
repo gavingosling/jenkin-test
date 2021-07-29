@@ -41,6 +41,9 @@ pipeline {
                     echo branch
                     echo "$branch"
                     echo "${branch}"
+                    if(branch == 'master'){
+                        echo 'branch equals master!'
+                    }
                 }
             }
         }
