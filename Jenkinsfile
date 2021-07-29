@@ -6,7 +6,8 @@ def generateStage(job, branch) {
         stage("stage: ${job}") {
             Exception exception = null
             try {
-                echo 'a'
+                sh 'pip install pandas'
+                sh 'python folder/test.py'
                 currentBuild.result = 'SUCCESS'
             } catch (e) {
                 currentBuild.result = 'FAILURE'
@@ -18,9 +19,7 @@ def generateStage(job, branch) {
                     BuildStatus[job] = 'SUCCESS'
                 }
                 if(currentResult == 'FAILURE'){
-                    def error = exception.toString()
-                    writeFile(file: 'exception.txt', text: error)
-                    sh 'python post_to_slack.py --file exception.txt'
+                    sh 'cat exception.txt'
                     BuildStatus[job] = 'FAILURE'
                 }
             }
@@ -30,67 +29,21 @@ def generateStage(job, branch) {
  
 pipeline {
     agent any
- 
+    environment {
+        FULL_PATH_BRANCH = "${sh(script:'git name-rev --name-only HEAD', returnStdout: true)}"
+        branch = FULL_PATH_BRANCH.substring(FULL_PATH_BRANCH.lastIndexOf('/') + 1, FULL_PATH_BRANCH.length())
+    }
     stages {
-        /*
-        stage("stage") {
-            steps {
-                sh("echo a")
-            }
-            post { 
-                success { 
-                    echo 'SUCCESS'               
-                }
-                failure { 
-                    echo 'FAILURE'
-                 }
-                aborted {
-                    echo 'ABORTED'
-                } 
-            }
-        }*/
  
-        stage('parallel stage') {
+        stage('stage') {
             steps {
                 script {
-                    def yaml = readYaml file: 'config.yaml'
-                    def config = yaml.get('cross-selling')
-                    def countries = []
-                    def branch = 'master'
-                    def filterCountries = "$country_filter"
-                    filterCountries = filterCountries.split(',')
-                    config.each{k, v ->
-                        if("$country_filter" == "" || filterCountries.contains(k)){
-                            countries << [country: k, branch: branch]
-                        }
-                    }
-                    
-                    def stages = countries.collectEntries {
-                        ["${it.country}" : generateStage(it.country, it.branch)]
-                    }
-                    
-                    (stages.keySet() as List).collate(1).each{
-                        def map = stages.subMap(it)
-                        parallel map
-                    }
+                    echo branch
+                    echo "$branch"
+                    echo "${branch}"
                 }
             }
         }
 
-        stage('Shutdown') {
-            steps {
-                script {
-                        def dt = new Date().format("yyyy/MM/dd HH:mm")  
-
-                        def log = "PIPELINE: $JOB_BASE_NAME, BUILD: $BUILD_NUMBER DATE: $dt\n"
-                        BuildStatus.each{ k, v -> log+= "${k}: ${v}\n" }
-                        writeFile(file: 'status.txt', text: log)
-                        sh("""
-                           cat status.txt
-                        """)
-                    }
-            
-                }
-            }
     }
 }
