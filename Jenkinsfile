@@ -38,10 +38,8 @@ pipeline {
         stage('stage') {
             steps {
                 script {
-                    echo branch
-                    echo "$branch"
-                    echo "${branch}"
-                    if("${branch}" == 'master'){
+                    def br = branch.trim()
+                    if(br == 'master'){
                         echo 'branch equals master!'
                     }
                 }
