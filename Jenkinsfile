@@ -38,9 +38,10 @@ pipeline {
         stage('stage') {
             steps {
                 script {
-                    
-                    if(branch == 'master'){
-                        echo 'branch equals master!'
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                        if(branch == 'master'){
+                            echo 'branch equals master!'
+                        }
                     }
                 }
             }
