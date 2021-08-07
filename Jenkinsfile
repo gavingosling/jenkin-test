@@ -38,11 +38,8 @@ pipeline {
         stage('stage') {
             steps {
                 script {
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-                        if(branch == 'master'){
-                            echo 'branch equals master!'
-                        }
-                    }
+                    sh 'curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py'
+                    sh 'python get-pip.py'
                 }
             }
         }
