@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     sh 'curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py'
-                    sh 'python get-pip.py'
+                    sh 'python3 get-pip.py'
                 }
             }
         }
