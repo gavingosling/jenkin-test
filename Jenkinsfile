@@ -1,5 +1,5 @@
 
-def send():
+def send(){
     def post = new URL('https://hooks.slack.com/services/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').openConnection();
     def message = '{"message":"this is a message"}'
     post.setRequestMethod("POST")
@@ -11,7 +11,7 @@ def send():
     if (postRC.equals(200)) {
         println(post.getInputStream().getText());
     }
-
+}
 
 pipeline {
     agent any
