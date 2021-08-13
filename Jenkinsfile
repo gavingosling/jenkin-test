@@ -1,32 +1,18 @@
-import groovy.transform.Field
 
-@Field Map BuildStatus = [:]
-def generateStage(job, branch) {
-    return {
-        stage("stage: ${job}") {
-            Exception exception = null
-            try {
-                sh 'pip install pandas'
-                sh 'python folder/test.py'
-                currentBuild.result = 'SUCCESS'
-            } catch (e) {
-                currentBuild.result = 'FAILURE'
-                exception = e
-                throw e
-            } finally {
-                def currentResult = currentBuild.result
-                if(currentResult == 'SUCCESS'){
-                    BuildStatus[job] = 'SUCCESS'
-                }
-                if(currentResult == 'FAILURE'){
-                    sh 'cat exception.txt'
-                    BuildStatus[job] = 'FAILURE'
-                }
-            }
-        }
+def send():
+    def post = new URL('https://hooks.slack.com/services/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').openConnection();
+    def message = '{"message":"this is a message"}'
+    post.setRequestMethod("POST")
+    post.setDoOutput(true)
+    post.setRequestProperty("Content-Type", "application/json")
+    post.getOutputStream().write(message.getBytes("UTF-8"));
+    def postRC = post.getResponseCode();
+    println(postRC);
+    if (postRC.equals(200)) {
+        println(post.getInputStream().getText());
     }
-}
- 
+
+
 pipeline {
     agent any
     environment {
@@ -38,8 +24,7 @@ pipeline {
         stage('stage') {
             steps {
                 script {
-                    sh 'curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py'
-                    sh 'python3 get-pip.py'
+                    send()
                 }
             }
         }
