@@ -17,7 +17,7 @@ pipeline {
                     echo result
                     echo result.getClass().toString()
                     String test = "curl -v  -d ${result} -X POST https://www.example.com"
-                    echo test
+                    sh(test)
                     
                 }
             }
