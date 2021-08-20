@@ -15,7 +15,7 @@ pipeline {
                     builder([text:"test"])
                     String result = builder.toString()
                     echo result
-                    sh "curl -v  -d ${result} -X POST https://www.example.com"
+                    sh 'curl -v  -d ${result} -X POST https://www.example.com'
                 }
             }
         }
