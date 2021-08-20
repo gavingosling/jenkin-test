@@ -1,3 +1,4 @@
+import groovy.json.JsonBuilder
 
 pipeline {
     agent any
@@ -10,8 +11,9 @@ pipeline {
         stage('stage') {
             steps {
                 script {
-                    def a = 'test'
-                    sh 'curl -v  -d '{"text":"test"}' -X POST https://www.example.com'
+                    def builder = new JsonBuilder()
+                    def json = builder(["text":"test"]).toString()
+                    sh "curl -v  -d ${json} -X POST https://www.example.com"
                 }
             }
         }
