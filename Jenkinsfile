@@ -1,4 +1,5 @@
-import groovy.json.JsonBuilder
+//import groovy.json.JsonBuilder
+import groovy.json.JsonOutput
 
 pipeline {
     agent any
@@ -11,14 +12,15 @@ pipeline {
         stage('stage') {
             steps {
                 script {
-                    def builder = new JsonBuilder()
-                    builder([text:"test"])
-                    String result = builder.toString()
-                    echo result
-                    echo result.getClass().toString()
-                    builder = ''
-                    String test = "curl -v  -d '${result}' -X POST https://www.example.com"
-                    sh(test)
+                    def data = [a:"a"]
+                    def json_str = JsonOutput.toJson(data)
+                    echo json_str
+                    //def builder = new JsonBuilder()
+                    //builder([text:"test"])
+                    //String result = builder.toString()
+                    //builder = ''
+                    //String test = "curl -v  -d '${result}' -X POST https://www.example.com"
+                    //sh(test)
                     
                 }
             }
