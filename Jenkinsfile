@@ -13,7 +13,8 @@ pipeline {
                 script {
                     def builder = new JsonBuilder()
                     builder([text:"test"])
-                    sh "curl -v  -d ${builder.toString()} -X POST https://www.example.com"
+                    String result = builder.toString()
+                    sh "curl -v  -d ${result} -X POST https://www.example.com"
                 }
             }
         }
