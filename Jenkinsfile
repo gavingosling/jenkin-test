@@ -10,7 +10,8 @@ pipeline {
         stage('stage') {
             steps {
                 script {
-                    sh 'curl -v  -d '{"text":"test"}' -X POST https://hooks.slack.com/services/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'
+                    def a = 'echo test'
+                    sh "${a}"
                 }
             }
         }
