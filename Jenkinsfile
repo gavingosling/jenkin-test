@@ -16,10 +16,9 @@ pipeline {
                     String result = builder.toString()
                     echo result
                     echo result.getClass().toString()
-
-                    sh("""
-                    curl -v  -d $result -X POST https://www.example.com
-                    """)
+                    String test = "curl -v  -d ${result} -X POST https://www.example.com"
+                    echo test
+                    
                 }
             }
         }
