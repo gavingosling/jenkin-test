@@ -17,9 +17,9 @@ pipeline {
                     echo result
                     echo result.getClass().toString()
 
-                    //sh("""
-                    //curl -v  -d ${result} -X POST https://www.example.com
-                    //""")
+                    sh("""
+                    curl -v  -d $result -X POST https://www.example.com
+                    """)
                 }
             }
         }
