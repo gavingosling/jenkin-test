@@ -14,6 +14,7 @@ pipeline {
                     def builder = new JsonBuilder()
                     builder([text:"test"])
                     String result = builder.toString()
+                    echo result
                     sh "curl -v  -d ${result} -X POST https://www.example.com"
                 }
             }
