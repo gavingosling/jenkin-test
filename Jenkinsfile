@@ -12,8 +12,8 @@ pipeline {
             steps {
                 script {
                     def builder = new JsonBuilder()
-                    def json = builder([text:"test"]).toString()
-                    sh "curl -v  -d ${json} -X POST https://www.example.com"
+                    builder([text:"test"])
+                    sh "curl -v  -d ${json.toString()} -X POST https://www.example.com"
                 }
             }
         }
