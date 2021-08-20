@@ -14,7 +14,8 @@ pipeline {
                 script {
                     def data = [a:"a"]
                     def json_str = JsonOutput.toJson(data)
-                    echo json_str
+                    def test = "curl -v  -d '${json_str}' -X POST https://www.example.com"
+                    sh(test)
                     //def builder = new JsonBuilder()
                     //builder([text:"test"])
                     //String result = builder.toString()
