@@ -10,8 +10,8 @@ pipeline {
         stage('stage') {
             steps {
                 script {
-                    def a = 'echo test'
-                    sh "${a}"
+                    def a = 'test'
+                    sh 'curl -v  -d '{"text":"${a}"}' -X POST https://www.example.com'
                 }
             }
         }
