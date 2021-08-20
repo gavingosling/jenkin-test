@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     def a = 'test'
-                    sh 'curl -v  -d '{"text":"${a}"}' -X POST https://www.example.com'
+                    sh 'curl -v  -d '{"text":"test"}' -X POST https://www.example.com'
                 }
             }
         }
