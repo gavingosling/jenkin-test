@@ -1,3 +1,4 @@
+def utils = load "Utils.gvy"
 
 pipeline {
     agent any
@@ -10,9 +11,7 @@ pipeline {
         stage('stage') {
             steps {
                 script {
-                    def rootDir = pwd()
-                    def exampleModule = load "Utils.gvy"
-                    exampleModule.greet()
+                    utils.greet()
                 }
             }
         }
