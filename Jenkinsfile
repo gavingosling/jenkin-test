@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     utils = load "Utils.gvy"
-                    echo utils
+                    echo utils.toString()
                     utils.greet()
                 }
             }
