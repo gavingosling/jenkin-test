@@ -12,6 +12,7 @@ pipeline {
             steps {
                 script {
                     utils = load "Utils.gvy"
+                    utils.greet()
                 }
             }
         }
