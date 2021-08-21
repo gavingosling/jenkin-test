@@ -1,4 +1,4 @@
-evaluate(new File('Utils.gvy')))
+evaluate(new File('Utils.gvy'))
 
 
 pipeline {
