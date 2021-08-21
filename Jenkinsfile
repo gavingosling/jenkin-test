@@ -1,4 +1,4 @@
-def utils = load "Utils.gvy"
+def utils = null;
 
 pipeline {
     agent any
@@ -8,7 +8,15 @@ pipeline {
     }
     stages {
  
-        stage('stage') {
+        stage('stage 1') {
+            steps {
+                script {
+                    utils = load "Utils.gvy"
+                }
+            }
+        }
+
+        stage('stage 2') {
             steps {
                 script {
                     utils.greet()
