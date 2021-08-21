@@ -1,5 +1,6 @@
-evaluate(new File('Utils.gvy'))
-
+File sourceFile = new File("Utils.gvy");
+Class groovyClass = new GroovyClassLoader(getClass().getClassLoader()).parseClass(sourceFile);
+GroovyObject myObject = (GroovyObject) groovyClass.newInstance();
 
 pipeline {
     agent any
