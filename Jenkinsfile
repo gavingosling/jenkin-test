@@ -16,6 +16,7 @@ pipeline {
                     utils.greet()
                     sh("python --version")
                     sh("python3 --version")
+                    sh("whereis python")
                 }
             }
         }
