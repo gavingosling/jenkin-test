@@ -16,7 +16,15 @@ pipeline {
                     utils.greet()
                     sh("python --version")
                     sh("python3 --version")
-                    sh("whereis python")
+                    sh("""
+                    python3 --version
+                    python3 -m pip install --upgrade pip
+                    python3 -m pip install --user virtualenv
+                    python3 -m venv $JOB_BASE_NAME
+                    source $JOB_BASE_NAME/bin/activate
+                    python3 -m pip install --upgrade pip
+                    python3 -m pip install -r requirements.txt
+                    """)
                 }
             }
         }
