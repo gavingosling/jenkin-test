@@ -14,6 +14,7 @@ pipeline {
                     utils = load "Utils.gvy"
                     echo utils.toString()
                     utils.greet()
+                    sh("python --version")
                 }
             }
         }
