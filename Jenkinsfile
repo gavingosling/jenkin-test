@@ -15,6 +15,7 @@ pipeline {
                     echo utils.toString()
                     utils.greet()
                     sh("python --version")
+                    sh("python3 --version")
                 }
             }
         }
